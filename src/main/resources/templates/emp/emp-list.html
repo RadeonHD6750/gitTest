@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>사원관리</title>
+
+  <style>
+    .result_area{
+      margin: 50px;
+      float: left;
+    }
+
+    .emp {
+      margin: 50px;
+      float: left;
+    }
+
+    .dept {
+      margin: 50px;
+      float: left;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.js"
+          integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+          crossorigin="anonymous"></script>
+
+
+  <script th:src="@{/js/common.js}"></script>
+  <script th:src="@{/js/department.js}"></script>
+  <script th:src="@{/js/employees.js}"></script>
+  <script>
+    $( document ).ready(function() {
+      console.log( "ready!" );
+
+      selectDepartmentList();
+    });
+
+  </script>
+</head>
+<body>
+
+<a href="/home">홈으로</a>
+
+<h1>사원관리</h1>
+
+<div>
+  <input type="hidden" id="IsUserInput">
+  <input type="hidden" id="dept_no">
+</div>
+
+<div class="emp_split">
+
+  <div class="dept">
+    <h3> 부서 선택 </h3>
+
+    <table border="1">
+      <thead>
+      <tr>
+        <th>부서번호</th>
+        <th>부서명</th>
+        <th>상급부서명</th>
+        <th>작업</th>
+      </tr>
+      </thead>
+      <tbody id="dept_list">
+
+      </tbody>
+    </table>
+  </div>
+
+  <div class="emp">
+    <h3> 사원 선택 </h3>
+
+    <table border="1">
+      <thead>
+      <tr>
+        <th>사원번호</th>
+        <th>사원명</th>
+        <th>부서명</th>
+        <th>상급부서명</th>
+        <th>작업</th>
+      </tr>
+      </thead>
+      <tbody id="user_list">
+
+      </tbody>
+    </table>
+  </div>
+
+
+</div>
+
+
+
+
+
+<div class="result_area">
+  <h3> 사원 </h3>
+
+  <p> 사원번호 <input type="text" id="employee_id" ></p>
+  <p> 사원명 <input type="text" id="emp_name" ></p>
+  <p> 이메일 <input type="text" id="email" ></p>
+  <p> 전화번호 <input type="text" id="phone_number" ></p>
+  <p> 입사일 <input type="text" id="hire_date" ></p>
+  <p> 연봉 <input type="text" id="salary" ></p>
+  <p> 상관번호 <input type="text" id="manager_id" ></p>
+  <p> 부서번호 <input type="text" id="department_id" ></p>
+  <p> 생성일 <input type="text" id="create_date" ></p>
+  <p> 갱신일 <input type="text" id="update_date" ></p>
+
+  <p>
+    <input type="button" id="emp_insert" value="추가" onclick="INSERT_EMPLOYEE_ONE()">
+    <input type="button" id="emp_update" value="수정" onclick="UPDATE_EMPLOYEE_ONE()">
+    <input type="button" id="emp_delete" value="삭제" onclick="DELETE_EMPLOYEE_ONE()">
+  </p>
+</div>
+</body>
+</html>

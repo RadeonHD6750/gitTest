@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+
+    <title>수강신청</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+
+<div id="wrap">
+    <header th:insert="~{common/header.html}"></header>
+    <div class="content-wrap">
+        <table>
+            <thead>
+            <tr>
+                <td >과목번호</td>
+                <td >과목명</td>
+                <td >교수</td>
+                <td >일정</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="schedule: ${scheduleList}">
+                <td th:text="${schedule.subId}"></td>
+                <td th:text="${schedule.subName}"></td>
+                <td th:text="${schedule.proName}"></td>
+                <td th:text="${schedule.spaceTime}" id="spaceTime"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<footer th:insert="~{common/footer.html}"></footer>
+</body>
+</html>

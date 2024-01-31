@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jimin.springboot.member.mapper.MemberMapper">
+
+    <insert id="insertMember"></insert>
+    <update id="updateMember"></update>
+    <update id="enableMember"></update>
+    <update id="disableMember"></update>
+
+    <update id="updateLoginState">
+        UPDATE members
+        SET login = #{loginCode}
+        WHERE user_id = #{userId}
+    </update>
+    <delete id="deleteMember"></delete>
+
+
+    <select id="idCheck" resultType="com.jimin.springboot.member.mapper.MemberVO"></select>
+
+    <select id="loginMember" resultType="com.jimin.springboot.member.mapper.MemberVO">
+        SELECT user_number AS "userNumber", user_id AS "userId", password, user_name AS "userName", email,
+               create_date AS "createDate", update_date AS "updateDate"
+        FROM members
+        WHERE user_id = #{userId}
+    </select>
+
+</mapper>

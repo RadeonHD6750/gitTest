@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>훈련과정</title>
+    <style>
+
+        .search_button
+        {
+            padding: 10px;
+            margin: 5px;
+            font-size: medium;
+            background-color: lightgreen;
+        }
+
+        .search_button:hover
+        {
+            font-size: large;
+            background-color: plum;
+        }
+
+
+
+        .training_area{
+            margin: 20px;
+            border: 2px solid red;
+        }
+
+        .training_card
+        {
+            padding: 20px;
+            margin: 50px;
+            border: 5px solid black;
+        }
+
+
+        .training_card:hover{
+            background-color: lightyellow;
+        }
+
+
+        .doing{
+            background-color: lightskyblue;
+            margin: 10px;
+            padding: 10px;
+        }
+
+
+        .recruiting{
+            background-color: limegreen;
+            margin: 10px;
+            padding: 10px;
+        }
+
+
+        .done{
+            background-color: gray;
+            margin: 10px;
+            padding: 10px;
+        }
+
+        .detail_button
+        {
+            padding: 10px;
+            font-size: medium;
+            background-color: cornflowerblue;
+        }
+
+        .detail_button:hover
+        {
+            font-size: large;
+            background-color: plum;
+        }
+
+
+
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/hrd-net.js}"></script>
+
+    <script>
+        $( document ).ready(function() {
+            console.log( "ready!" );
+
+        });
+    </script>
+
+</head>
+<body>
+
+<h1>훈련과정 조회</h1>
+
+
+<div>
+    <input type="hidden" id="trprId">
+
+
+    <p>시작일<input type="text" id="srchTraStDt" value="20230101"> </p>
+    <p>종료일<input type="text" id="srchTraEndDt" value="20231231"> </p>
+
+    <input class="search_button" type="button" id="request_SELECT_TRAINING_API_LIST" onclick="SELECT_TRAINING_ALL_LIST()" value="전체조회">
+    <input class="search_button" type="button" id="request_SELECT_TRAINING_DOING_LIST" onclick="SELECT_TRAINING_DOING_LIST()" value="진행중인 훈련조회">
+    <input class="search_button" type="button" id="request_SELECT_TRAINING_RECRUIT_LIST" onclick="SELECT_TRAINING_RECRUIT_LIST()" value="모집중인 훈련조회">
+    <input class="search_button" type="button" id="request_SELECT_TRAINING_DONE_LIST" onclick="SELECT_TRAINING_DONE_LIST()" value="종료된 훈련조회">
+</div>
+
+
+<div class="training_area" id="training_result">
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <!--
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    -->
+
+    <link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+
+    <title>Jimin SpringBoot</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+
+    </script>
+</head>
+<body>
+    <div class="loginForm">
+        <h3> 로그인 </h3>
+        <input type="text" id="userId" name="userId" placeholder="user id를 입력하세요"> <br>
+        <input type="password" id="password" name="password" placeholder="비밀번호 입력"> <br>
+        <button type="button" onclick="login()" >로그인</button>
+    </div>
+
+    <a href="register.html">회원가입</a>
+</body>
+</html>

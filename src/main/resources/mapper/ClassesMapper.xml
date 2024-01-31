@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jimin.springboot.classes.mapper.ClassesMapper">
+
+
+    <select id="selectSubjectList" resultType="com.jimin.springboot.classes.mapper.SubjectVO">
+        SELECT s.sub_id, s.sub_name , p.pro_name
+        FROM SUBJECT s , PROFESSER p
+        WHERE s.PRO_ID = p.PRO_ID
+
+    </select>
+    <select id="selectSubjectScheduleList" resultType="com.jimin.springboot.classes.mapper.SubjectScheduleVO">
+        SELECT s.sub_name  , cr.room_name, d.day_id , d.day ,
+               ts.time_id , ts.start_time , ts.end_time
+        FROM SUBJECT s , CLASS_ROOM cr , SCHEDULE sc,
+             TIME_SCHEDULE ts , DAY d
+        WHERE cr.ROOM_ID = sc.ROOM_ID
+          AND sc.SUB_ID = s.SUB_ID
+          AND sc.TIME_ID = ts.TIME_ID
+          AND sc.DAY_ID = d.DAY_ID
+          AND s.SUB_ID = #{subId}
+        ORDER BY sc.DAY_ID, ts.TIME_ID  ASC
+    </select>
+</mapper>

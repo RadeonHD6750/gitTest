@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+
+    <title>모니터링</title>
+
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous">
+
+    </script>
+
+    <script type="text/javascript"
+            src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.js">
+
+    </script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/mqtt.js}"></script>
+    <script>
+        let myChart = null;
+        let humChart = null;
+        const windowSize = 100;
+        let isReady = false;
+
+        const labelList = [];
+        const humlabelList = [];
+        const dataList = [];
+        const humdataList = [];
+
+
+        document.addEventListener("DOMContentLoaded", function ()
+        {
+            const dataConfig = {
+                labels: labelList,
+                datasets: [{
+                    label: '온도',
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(99,93,93)',
+                    data: dataList,
+                }]
+            };
+
+            const humdataConfig = {
+                labels: humlabelList,
+                datasets: [{
+                    label: '습도',
+                    backgroundColor: 'rgb(76,148,211)',
+                    borderColor: 'rgb(99,93,93)',
+                    data: humdataList,
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: dataConfig,
+                options: {
+                    responsive: true,
+                    scale: {
+                        beginAtZero: false,
+                        min: 0,
+                        max: 40
+
+                    }
+                }
+            };
+
+            const humconfig = {
+                type: 'line',
+                data: humdataConfig,
+                options: {
+                    responsive: true,
+                    scale: {
+                        beginAtZero: false,
+                        min: 0,
+                        max: 100
+
+                    }
+                }
+            };
+
+
+            const chartCanvas = document.getElementById('myChart');
+            const humCanvas = document.getElementById('humChart');
+
+            myChart = new Chart(
+                chartCanvas,
+                config
+            );
+            console.log(myChart);
+
+            humChart = new Chart(
+                humCanvas,
+                humconfig
+            );
+            console.log(humChart);
+            isReady = true;
+        });
+
+        function addData(temp, tempDate)
+        {
+
+            if (dataList.length > windowSize)
+            {
+                dataList.shift();
+                labelList.shift();
+            }
+            labelList.push(tempDate);
+            dataList.push(temp);
+            myChart.update();
+        }
+
+
+        function addHumData(hum, humDate)
+        {
+
+            if (humdataList.length > windowSize)
+            {
+                humdataList.shift();
+                humlabelList.shift();
+            }
+            humlabelList.push(humDate);
+            humdataList.push(hum);
+            humChart.update();
+        }
+
+        function NowDate()
+        {
+            const n = new Date();
+            const yyyy = n.getFullYear().toString();
+            const MM = pad(n.getMonth() + 1,2);
+            const dd = pad(n.getDate(), 2);
+            const hh = pad(n.getHours(), 2);
+            const mm = pad(n.getMinutes(), 2)
+            const ss = pad(n.getSeconds(), 2)
+
+            return yyyy +  MM + dd+  hh + mm + ss;
+        };
+
+        function pad(number, length) {
+            var str = '' + number;
+            while (str.length < length) {
+                str = '0' + str;
+            }
+            return str;
+        };
+
+    </script>
+    <script>
+
+        $( document ).ready(function() {
+            console.log( "ready!" );
+            StartMqtt();
+        });
+    </script>
+</head>
+<body>
+
+<h1>온습도 모니터링</h1>
+
+<div>
+    <div>
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <div>
+        <canvas id="humChart"></canvas>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>

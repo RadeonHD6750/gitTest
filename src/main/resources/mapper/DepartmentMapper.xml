@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jimin.springboot.departments.mapper.DepartmentMapper">
+
+    <select id="isDepartment" resultType="com.jimin.springboot.departments.mapper.DepartmentVO">
+        SELECT department_id, department_name, parent_id, manager_id, create_date, update_date
+        FROM departments d
+        WHERE d.department_id = #{departmentId}
+    </select>
+
+    <select id="selectDepartmentList" resultType="com.jimin.springboot.departments.mapper.DepartmentVO">
+        SELECT d.department_id, d.department_name,u.department_name "parent_department_name",  d.parent_id, d.manager_id, d.create_date, d.update_date
+        FROM departments d, departments u
+        WHERE d.parent_id = u.department_id
+
+    </select>
+
+</mapper>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jimin.springboot.employees.mapper.EmployeeMapper">
+
+    <select id="selectEmployeeOne" resultType="com.jimin.springboot.employees.mapper.EmployeeVO">
+        SELECT employee_id, emp_name, email, phone_number, hire_date,  salary, manager_id, department_id, create_date, update_date
+        FROM employees
+        WHERE employee_id = #{employeeId}
+    </select>
+
+    <select id="selectEmployeeList" resultType="com.jimin.springboot.employees.mapper.EmployeeExtentionVO">
+        SELECT e.employee_id, e.emp_name, d.department_id, d.department_name, u.department_name "parent_department_name"
+        FROM employees e, departments d, departments u
+        WHERE e.department_id = d.department_id
+        AND d.parent_id = u.department_id
+        AND d.department_id = #{departmentId}
+    </select>
+
+    <insert id="insertEmployeeOne">
+
+        INSERT INTO employees(
+
+    employee_id,
+    emp_name,
+    email,
+    phone_number,
+    hire_date,
+    salary,
+    manager_id,
+    department_id,
+
+    create_date,
+    update_date
+                                     )
+        VALUES
+            (
+
+                #{employeeId},
+                #{empName},
+                #{email},
+                #{phoneNumber},
+                #{hireDate},
+                #{salary},
+                #{managerId},
+                #{departmentId},
+                SYSDATE,
+                SYSDATE
+            )
+    </insert>
+
+    <update id="updateEmployeeOne">
+
+        UPDATE employees
+        SET
+            emp_name =        #{empName},
+            email =           #{email},
+            phone_number =    #{phoneNumber},
+            hire_date =       #{hireDate},
+            salary =          #{salary},
+            manager_id =      #{managerId},
+            department_id =   #{departmentId},
+            update_date = SYSDATE
+
+        WHERE employee_id = #{employeeId}
+
+    </update>
+
+    <delete id="deleteEmployeeOne">
+        DELETE
+        FROM employees
+        WHERE employee_id = #{employeeId}
+    </delete>
+
+</mapper>

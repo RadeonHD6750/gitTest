@@ -1,0 +1,19 @@
+<div class="header-class">
+
+    <div class="logo" style="margin-left: 5px ">
+        <a href="/static">HOME</a>
+    </div>
+
+    <div class="title">
+        <h1>SpringBoot</h1>
+    </div>
+
+    <div class="loginInfo">
+        <span  th:text="${session.USER_ID}"></span>
+        <span  th:text="${session.USER_NAME}"></span>
+    </div>
+
+    <div class="loginController" style="margin-right: 5px ">
+        <button type="button" onclick="logout()" >로그아웃</button>
+    </div>
+</div>

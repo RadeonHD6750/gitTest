@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <!--
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+    -->
+    <link rel="stylesheet" th:href="@{/css/common.css}" type="text/css">
+
+    <title>Jimin SpringBoot</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+            integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+            crossorigin="anonymous"></script>
+
+    <script th:src="@{/js/common.js}"></script>
+    <script>
+
+    </script>
+
+<body>
+
+<header th:insert="~{common/header.html}"></header>
+
+<h1>HOME</h1>
+
+<a href="/emp/list">사원관리</a>
+<a href="/dept/list">부서관리</a>
+<a href="/training/list">훈련과정 조회</a>
+<a href="/board/list">커뮤니티</a>
+<a href="/classes/list">수강신청</a>
+<a href="/sensor/list">모니터링</a>
+
+<footer th:insert="~{common/footer.html}"></footer>
+
+</body>
+</html>
